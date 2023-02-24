@@ -1,0 +1,13 @@
+h1 {
+    font-size: 5rem;
+    text-align: center;
+}
+
+main h2 {
+    font-size: 3rem;
+    text-align: center;
+}
+
+#image {
+    border: 1px solid black;
+}
