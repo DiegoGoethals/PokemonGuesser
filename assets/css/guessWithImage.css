@@ -5,3 +5,7 @@ main {
     width: 100vw;
     height: 100vh;
 }
+
+img {
+    filter: brightness(0);
+}
