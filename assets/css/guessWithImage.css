@@ -1,11 +1,37 @@
+@font-face {
+    font-family: pokemon;
+    src: url("/assets/css/fonts/Pokemon Solid.ttf");
+}
+
 main {
-    background-image: url("/assets/images/background.jpg");
-    background-repeat: no-repeat;
-    background-size: auto;
-    width: 100vw;
-    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#guessContainer {
+    display: flex;
+    justify-content: center;
+}
+
+input {
+    font-family: pokemon, serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.25rem;
+    color: yellow;
+    -webkit-text-stroke: 0.1rem blue; /* width and color */
 }
 
 img {
     filter: brightness(0);
+}
+
+#imageContainer {
+    background-image: url("/assets/images/blue_background.jpg");
+    background-repeat: no-repeat;
+    background-size: auto;
+    height: 100%;
+    width: max-content;
+    margin: 0;
 }
