@@ -21,16 +21,14 @@ input {
     height: 1.75rem;
     margin: 1rem;
     padding: 0.5rem 0.5rem 0.5rem 1.5rem;
-    font-family: pokemon, sans-serif;
     font-size: 1.75rem;
     letter-spacing: 0.25rem;
-    color: yellow;
-    -webkit-text-stroke: 0.1rem blue;
+    color: blue;
     background: black;
     text-transform: uppercase;
 }
 
-#dropDown {
+ul {
     list-style: none;
     display: none;
     z-index: 1;
@@ -40,8 +38,6 @@ input {
     text-transform: uppercase;
     background: black;
     color: yellow;
-    -webkit-text-stroke: 0.1rem blue;
-    font-family: pokemon, sans-serif;
     font-size: 1.5rem;
     letter-spacing: 0.25rem;
     padding: 0.5rem;
@@ -58,4 +54,8 @@ img {
     height: 100%;
     width: max-content;
     margin: 0;
+}
+
+li:hover {
+    cursor: pointer;
 }

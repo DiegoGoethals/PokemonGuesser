@@ -6,7 +6,6 @@ let _pokemon;
 function init() {
     setPokemon();
     document.querySelector("input").addEventListener("input", showOptions);
-    document.querySelector("input").addEventListener("keypress", guess);
 }
 
 function setPokemon() {
@@ -38,21 +37,31 @@ function showOptions() {
             <li>${rightPokemon.name}</li>
         `);
     });
+    document.querySelectorAll("li").forEach(li => {
+        li.addEventListener("click", autoComplete);
+    });
     list.style.display = "block";
     if (input.value === "" || list.innerHTML === "") {
         list.style.display = "none";
     }
 }
 
-function guess(e) {
+function autoComplete(e) {
+    const list = document.querySelector("ul");
+    const input = document.querySelector("input");
+    input.value = e.target.innerHTML;
+    input.innerHTML = e.target.innerHTML;
+    list.style.display = "none";
+    guess();
+}
+
+function guess() {
     const guess = document.querySelector("input").value.toLowerCase();
-    if (e.key === "Enter") {
-        if (guess === _pokemon.name) {
-            alert("Congrats, you won");
-            location.reload();
-        } else {
-            alert("You lost, you big loser");
-            location.reload();
-        }
+    if (guess === _pokemon.name) {
+        alert("Congrats, you won");
+        location.reload();
+    } else {
+        alert("You lost, you big loser");
+        location.reload();
     }
 }
