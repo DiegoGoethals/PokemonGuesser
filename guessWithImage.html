@@ -8,6 +8,7 @@
     <!-- Styling -->
     <link rel="stylesheet" href="assets/css/reset.css">
     <link rel="stylesheet" href="assets/css/guessWithImage.css">
+    <link rel="stylesheet" href="assets/css/guesser.css">
 
     <!-- Scripts -->
     <script src="assets/js/apiCommunicator.js" defer></script>
@@ -23,6 +24,22 @@
                 <input placeholder="Guess the pokémon ..." autocomplete="off">
             </label>
             <ul></ul>
+        </div>
+        <div id="game">
+            <div id="imageContainer"></div>
+            <div id="guesses">
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Dex number</th>
+                        <th>Type 1</th>
+                        <th>Type 2</th>
+                        <th>Ability 1</th>
+                        <th>Ability 2</th>
+                        <th>Ability 3</th>
+                    </tr>
+                </table>
+            </div>
         </div>
     </main>
 </body>
