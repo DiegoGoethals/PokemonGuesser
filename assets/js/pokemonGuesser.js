@@ -108,7 +108,7 @@ function getTypes(pokemon) {
 function getAbilities(pokemon) {
     let abilities = "";
     pokemon.abilities.forEach(ability => {
-        if (_pokemon.abilities.includes(ability)) {
+        if (isCorrectAbility(pokemon)) {
             abilities += `<td class="correct">${ability.ability.name.replace("-", " ")}</td>`;
         } else  {
             abilities += `<td>${ability.ability.name.replace("-", " ")}</td>`;
@@ -131,6 +131,20 @@ function isCorrectType(pokemon) {
     types1.forEach(type => {
         console.log(types2.includes(type));
         answer = types2.includes(type);
+    });
+    return answer;
+}
+
+function isCorrectAbility(pokemon) {
+    const abilities1 = pokemon.abilities.map(ability => {
+        return ability.ability.name;
+    });
+    const abilities2 = _pokemon.abilities.map(ability => {
+        return ability.ability.name;
+    });
+    let answer = false;
+    abilities1.forEach(ability => {
+        answer = abilities2.includes(ability);
     });
     return answer;
 }
