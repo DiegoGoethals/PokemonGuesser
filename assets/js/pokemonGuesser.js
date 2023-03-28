@@ -87,17 +87,15 @@ function showGuess(guess) {
 
 function getTypes(pokemon) {
     let types = "";
-    console.log(_pokemon.types);
-    console.log(pokemon.types);
     if (pokemon.types.length === 1) {
-        if (_pokemon.types.includes(pokemon.types[0])) {
+        if (isCorrectType(pokemon)) {
             types += `<td class="correct">${pokemon.types[0].type.name}</td><td>This pokemon only has 1 type</td>`
         } else {
             types += `<td>${pokemon.types[0].type.name}</td><td>This pokemon only has 1 type</td>`
         }
     } else {
         pokemon.types.forEach(type => {
-            if (_pokemon.types.includes(type)) {
+            if (isCorrectType(pokemon)) {
                 types += `<td class="correct">${type.type.name}</td>`;
             } else {
                 types += `<td>${type.type.name}</td>`;
@@ -111,13 +109,28 @@ function getAbilities(pokemon) {
     let abilities = "";
     pokemon.abilities.forEach(ability => {
         if (_pokemon.abilities.includes(ability)) {
-            abilities += `<td class="correct">${ability.ability.name}</td>`;
+            abilities += `<td class="correct">${ability.ability.name.replace("-", " ")}</td>`;
         } else  {
-            abilities += `<td>${ability.ability.name}</td>`;
+            abilities += `<td>${ability.ability.name.replace("-", " ")}</td>`;
         }
     });
     if (pokemon.abilities.length === 2) {
         abilities += `<td>This pokemon only has 2 abilities</td>`
     }
     return abilities;
+}
+
+function isCorrectType(pokemon) {
+    const types1 = pokemon.types.map(type => {
+        return type.type.name;
+    });
+    const types2 = _pokemon.types.map(type => {
+        return type.type.name;
+    });
+    let answer = false;
+    types1.forEach(type => {
+        console.log(types2.includes(type));
+        answer = types2.includes(type);
+    });
+    return answer;
 }
