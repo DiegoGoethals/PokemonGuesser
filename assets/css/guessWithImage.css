@@ -10,39 +10,6 @@ main {
     align-items: center;
 }
 
-#guessContainer {
-    display: flex;
-    justify-content: center;
-    position: relative;
-}
-
-input {
-    width: 25rem;
-    height: 1.75rem;
-    margin: 1rem;
-    padding: 0.5rem 0.5rem 0.5rem 1.5rem;
-    font-size: 1.75rem;
-    letter-spacing: 0.25rem;
-    color: blue;
-    background: black;
-    text-transform: uppercase;
-}
-
-ul {
-    list-style: none;
-    display: none;
-    z-index: 1;
-    position: absolute;
-    top: 82%;
-    left: 4%;
-    text-transform: uppercase;
-    background: black;
-    color: yellow;
-    font-size: 1.5rem;
-    letter-spacing: 0.25rem;
-    padding: 0.5rem;
-}
-
 img {
     filter: brightness(0);
 }
@@ -56,6 +23,8 @@ img {
     margin: 0;
 }
 
-li:hover {
-    cursor: pointer;
+#game {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
