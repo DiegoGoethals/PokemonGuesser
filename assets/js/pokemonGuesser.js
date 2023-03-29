@@ -80,14 +80,13 @@ function guess() {
 
 function showGuess(guess) {
     fetchFromServer(`https://pokeapi.co/api/v2/pokemon/${guess}`, "GET").then(pokemon => {
-        document.querySelector("table").insertAdjacentHTML("beforeend", `
-        <tr>
-            <td>${guess.toUpperCase()}</td>
-            <td>${pokemon.id}</td>
-            ${getTypes(pokemon)}
-            ${getAbilities(pokemon)}
-        </tr>
-    `);
+        let tr = document.querySelector("table").insertRow();
+        tr.innerHTML = `<tr>
+                <td>${guess.toUpperCase()}</td>
+                <td>${pokemon.id}</td>
+                ${getTypes(pokemon)}
+                ${getAbilities(pokemon)}
+            </tr>`;
     });
 }
 
@@ -95,9 +94,14 @@ function getTypes(pokemon) {
     let types = "";
     if (pokemon.types.length === 1) {
         if (isCorrectType(pokemon.types[0])) {
-            types += `<td class="correct">${pokemon.types[0].type.name}</td><td>This pokemon only has 1 type</td>`
+            types += `<td class="correct">${pokemon.types[0].type.name}</td>`
         } else {
-            types += `<td>${pokemon.types[0].type.name}</td><td>This pokemon only has 1 type</td>`
+            types += `<td>${pokemon.types[0].type.name}</td>`
+        }
+        if (_pokemon.types.length === 1) {
+            types += `<td class="correct">This pokemon only has 1 type</td>`;
+        } else {
+            types += `<td>This pokemon only has 1 type</td>`;
         }
     } else {
         pokemon.types.forEach(type => {

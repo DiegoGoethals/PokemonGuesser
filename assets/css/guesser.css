@@ -66,5 +66,5 @@ tr:nth-child(even) {
 }
 
 .correct {
-    color: lightgreen;
+    color: darkgreen;
 }
