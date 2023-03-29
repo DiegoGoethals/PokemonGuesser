@@ -88,14 +88,14 @@ function showGuess(guess) {
 function getTypes(pokemon) {
     let types = "";
     if (pokemon.types.length === 1) {
-        if (isCorrectType(pokemon)) {
+        if (isCorrectType(pokemon.types[0])) {
             types += `<td class="correct">${pokemon.types[0].type.name}</td><td>This pokemon only has 1 type</td>`
         } else {
             types += `<td>${pokemon.types[0].type.name}</td><td>This pokemon only has 1 type</td>`
         }
     } else {
         pokemon.types.forEach(type => {
-            if (isCorrectType(pokemon)) {
+            if (isCorrectType(type)) {
                 types += `<td class="correct">${type.type.name}</td>`;
             } else {
                 types += `<td>${type.type.name}</td>`;
@@ -108,7 +108,7 @@ function getTypes(pokemon) {
 function getAbilities(pokemon) {
     let abilities = "";
     pokemon.abilities.forEach(ability => {
-        if (isCorrectAbility(pokemon)) {
+        if (isCorrectAbility(ability)) {
             abilities += `<td class="correct">${ability.ability.name.replace("-", " ")}</td>`;
         } else  {
             abilities += `<td>${ability.ability.name.replace("-", " ")}</td>`;
@@ -120,31 +120,16 @@ function getAbilities(pokemon) {
     return abilities;
 }
 
-function isCorrectType(pokemon) {
-    const types1 = pokemon.types.map(type => {
+function isCorrectType(type) {
+    const types = _pokemon.types.map(type => {
         return type.type.name;
     });
-    const types2 = _pokemon.types.map(type => {
-        return type.type.name;
-    });
-    let answer = false;
-    types1.forEach(type => {
-        console.log(types2.includes(type));
-        answer = types2.includes(type);
-    });
-    return answer;
+    return types.includes(type.type.name);
 }
 
-function isCorrectAbility(pokemon) {
-    const abilities1 = pokemon.abilities.map(ability => {
+function isCorrectAbility(ability) {
+    const abilities = _pokemon.abilities.map(ability => {
         return ability.ability.name;
     });
-    const abilities2 = _pokemon.abilities.map(ability => {
-        return ability.ability.name;
-    });
-    let answer = false;
-    abilities1.forEach(ability => {
-        answer = abilities2.includes(ability);
-    });
-    return answer;
+    return abilities.includes(ability.ability.name);
 }
