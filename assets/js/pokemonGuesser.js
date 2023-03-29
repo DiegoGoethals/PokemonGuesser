@@ -67,11 +67,22 @@ function autoComplete(e) {
 function guess() {
     const guess = document.querySelector("input").value.toLowerCase();
     showGuess(guess);
+    let highScore;
+    if (localStorage.getItem("gamemode") === "withImage") {
+        highScore = "imageHighScore";
+    } else {
+        highScore = "noImageHighScore";
+    }
     if (guess === _pokemon.name) {
+        localStorage.setItem("currentScore", JSON.stringify(parseInt(localStorage.getItem("currentScore")) + 1));
+        if (localStorage.getItem("currentScore") > localStorage.getItem(highScore)) {
+            localStorage.setItem(highScore, localStorage.getItem("currentScore"));
+        }
         openOverlay("Congrats, you won");
     } else if (_guesses_left > 1) {
         _guesses_left--;
     } else {
+        localStorage.setItem("currentScore", JSON.stringify(0));
         openOverlay("You lost, you big loser");
     }
     showGuessesLeft();
@@ -150,10 +161,18 @@ function isCorrectAbility(ability) {
 }
 
 function openOverlay(message) {
+    let highScore;
+    if (localStorage.getItem("gamemode") === "withImage") {
+        highScore = JSON.parse(localStorage.getItem("imageHighScore"));
+    } else {
+        highScore = JSON.parse(localStorage.getItem("noImageHighScore"));
+    }
     const overlay = document.getElementById("overlay");
     overlay.insertAdjacentHTML("beforeend", `
         <div id="endScreen">
             <p>${message}</p>
+            <p>your current score is: ${JSON.parse(localStorage.getItem("currentScore"))}</p>
+            <p>your highscore is: ${highScore}</p>
             <p>The pokémon we were looking for was:</p>
             <img src="${_pokemon.sprites.other["official-artwork"].front_default}" alt="${_pokemon.name}"/>
             <p>${_pokemon.name}</p>
