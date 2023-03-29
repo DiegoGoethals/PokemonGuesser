@@ -68,13 +68,11 @@ function guess() {
     const guess = document.querySelector("input").value.toLowerCase();
     showGuess(guess);
     if (guess === _pokemon.name) {
-        alert("Congrats, you won");
-        location.reload();
+        openOverlay("Congrats, you won");
     } else if (_guesses_left > 1) {
         _guesses_left--;
     } else {
-        alert("You lost, you big loser");
-        location.reload();
+        openOverlay("You lost, you big loser");
     }
     showGuessesLeft();
 }
@@ -83,7 +81,7 @@ function showGuess(guess) {
     fetchFromServer(`https://pokeapi.co/api/v2/pokemon/${guess}`, "GET").then(pokemon => {
         let tr = document.querySelector("table").insertRow();
         tr.innerHTML = `<tr>
-                <td>${guess.toUpperCase()}</td>
+                <td>${guess}</td>
                 ${checkId(pokemon)}
                 ${getTypes(pokemon)}
                 ${getAbilities(pokemon)}
@@ -149,4 +147,26 @@ function isCorrectAbility(ability) {
         return ability.ability.name;
     });
     return abilities.includes(ability.ability.name);
+}
+
+function openOverlay(message) {
+    const overlay = document.getElementById("overlay");
+    overlay.insertAdjacentHTML("beforeend", `
+        <div id="endScreen">
+            <p>${message}</p>
+            <p>The pokémon we were looking for was:</p>
+            <img src="${_pokemon.sprites.other["official-artwork"].front_default}" alt="${_pokemon.name}"/>
+            <p>${_pokemon.name}</p>
+            <button onclick="location.reload();">Play again</button>
+        </div>
+    `);
+    overlay.style.display = "flex";
+    document.querySelector("body").style.overflow = "hidden";
+}
+
+function off() {
+    const overlay = document.getElementById("overlay");
+    overlay.style.display = "none";
+    document.querySelector("body").style.overflow = "auto";
+    document.querySelector("body").style.marginRight = "0";
 }

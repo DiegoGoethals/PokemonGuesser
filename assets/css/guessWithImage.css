@@ -10,7 +10,7 @@ main {
     align-items: center;
 }
 
-img {
+#imageContainer img {
     filter: brightness(0);
 }
 
