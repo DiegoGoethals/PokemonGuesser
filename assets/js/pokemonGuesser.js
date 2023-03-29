@@ -1,10 +1,11 @@
 "use strict";
 
-init();
 let _pokemon;
 let _guesses_left = 6;
+init();
 
 function init() {
+    showGuessesLeft();
     setPokemon();
     document.querySelector("input").addEventListener("input", showOptions);
 }
@@ -15,6 +16,10 @@ function setPokemon() {
         checkPage(pokemon);
         _pokemon = pokemon;
     });
+}
+
+function showGuessesLeft() {
+    document.querySelector("#guessesLeft").innerHTML = _guesses_left;
 }
 
 function checkPage(pokemon) {
@@ -70,6 +75,7 @@ function guess() {
         alert("You lost, you big loser");
         location.reload();
     }
+    showGuessesLeft();
 }
 
 function showGuess(guess) {
