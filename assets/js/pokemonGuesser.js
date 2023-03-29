@@ -23,8 +23,7 @@ function showGuessesLeft() {
 }
 
 function checkPage(pokemon) {
-    const title = document.querySelector("title").innerHTML;
-    if (title.includes("image")) {
+    if (localStorage.getItem("gamemode") === "withImage") {
         showImage(pokemon);
     } else {
         // TO DO
@@ -106,11 +105,7 @@ function getTypes(pokemon) {
         } else {
             types += `<td>${pokemon.types[0].type.name}</td>`
         }
-        if (_pokemon.types.length === 1) {
-            types += `<td class="correct">This pokemon only has 1 type</td>`;
-        } else {
-            types += `<td>This pokemon only has 1 type</td>`;
-        }
+        types += `<td>/</td>`;
     } else {
         pokemon.types.forEach(type => {
             if (isCorrectType(type)) {
@@ -132,8 +127,10 @@ function getAbilities(pokemon) {
             abilities += `<td>${ability.ability.name.replace("-", " ")}</td>`;
         }
     });
-    if (pokemon.abilities.length === 2) {
-        abilities += `<td>This pokemon only has 2 abilities</td>`
+    if (pokemon.abilities.length < 3) {
+        for (let i = pokemon.abilities.length; i < 3; i++) {
+            abilities += `<td>/</td>`;
+        }
     }
     return abilities;
 }
