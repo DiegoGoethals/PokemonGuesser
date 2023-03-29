@@ -1,11 +1,10 @@
 "use strict";
 
 let _pokemon;
-let _guesses_left = 6;
+let _guesses_left;
 init();
 
 function init() {
-    showGuessesLeft();
     setPokemon();
     document.querySelector("input").addEventListener("input", showOptions);
 }
@@ -25,9 +24,12 @@ function showGuessesLeft() {
 function checkPage(pokemon) {
     if (localStorage.getItem("gamemode") === "withImage") {
         showImage(pokemon);
+        _guesses_left = 6;
     } else {
-        // TO DO
+        _guesses_left = 10;
+        document.getElementById("imageContainer").style.display = "none";
     }
+    showGuessesLeft();
 }
 
 function showOptions() {
