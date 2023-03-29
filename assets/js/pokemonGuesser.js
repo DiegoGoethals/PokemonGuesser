@@ -19,7 +19,7 @@ function setPokemon() {
 }
 
 function showGuessesLeft() {
-    document.querySelector("#guessesLeft").innerHTML = _guesses_left;
+    document.querySelector("#guessesLeft").innerHTML = `${_guesses_left}`;
 }
 
 function checkPage(pokemon) {
@@ -83,11 +83,19 @@ function showGuess(guess) {
         let tr = document.querySelector("table").insertRow();
         tr.innerHTML = `<tr>
                 <td>${guess.toUpperCase()}</td>
-                <td>${pokemon.id}</td>
+                ${checkId(pokemon)}
                 ${getTypes(pokemon)}
                 ${getAbilities(pokemon)}
             </tr>`;
     });
+}
+
+function checkId(pokemon) {
+    if (pokemon.id > _pokemon.id) {
+        return `<td>${pokemon.id} <i class="fa-solid fa-arrow-down"></i></td>`
+    } else {
+        return `<td>${pokemon.id} <i class="fa-solid fa-arrow-up"></i></td>`
+    }
 }
 
 function getTypes(pokemon) {
