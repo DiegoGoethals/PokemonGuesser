@@ -2,6 +2,17 @@ body {
     overflow: hidden;
 }
 
+#changeMode {
+    padding: 0.5rem;
+    border-radius: 1rem;
+    font-size: 1rem;
+}
+
+#changeMode:hover {
+    background-color: black;
+    color: whitesmoke;
+}
+
 button {
     cursor: pointer;
 }
@@ -32,7 +43,6 @@ input {
     margin: 1rem;
     padding: 0.5rem 0.5rem 0.5rem 1.5rem;
     font-size: 1.75rem;
-    letter-spacing: 0.25rem;
     color: blue;
     background: black;
     text-transform: uppercase;
@@ -67,6 +77,10 @@ li:hover {
     width: 100%;
 }
 
+#guesses {
+    width: 50%;
+}
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -76,7 +90,7 @@ table {
 td, th {
     border: 1px solid #dddddd;
     text-align: left;
-    padding: 8px;
+    padding: 0.5rem;
 }
 
 tr:nth-child(even) {
