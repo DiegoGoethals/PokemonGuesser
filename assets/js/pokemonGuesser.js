@@ -22,7 +22,7 @@ function showGuessesLeft() {
 }
 
 function checkPage(pokemon) {
-    if (localStorage.getItem("gamemode") === "withImage") {
+    if (localStorage.getItem("gamemode") === "image") {
         showImage(pokemon);
         _guesses_left = 6;
     } else {
@@ -68,7 +68,7 @@ function guess() {
     const guess = document.querySelector("input").value.toLowerCase();
     showGuess(guess);
     let highScore;
-    if (localStorage.getItem("gamemode") === "withImage") {
+    if (localStorage.getItem("gamemode") === "image") {
         highScore = "imageHighScore";
     } else {
         highScore = "noImageHighScore";
@@ -163,7 +163,7 @@ function isCorrectAbility(ability) {
 
 function openOverlay(message) {
     let highScore;
-    if (localStorage.getItem("gamemode") === "withImage") {
+    if (localStorage.getItem("gamemode") === "image") {
         highScore = JSON.parse(localStorage.getItem("imageHighScore"));
     } else {
         highScore = JSON.parse(localStorage.getItem("noImageHighScore"));

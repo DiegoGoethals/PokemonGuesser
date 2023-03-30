@@ -3,9 +3,9 @@
 init();
 
 function init() {
-    initializeHighscores();
-    document.querySelectorAll("button").forEach(button => {
-        button.addEventListener("click", setGamemode);
+    initializeScores();
+    document.querySelectorAll("div").forEach(div => {
+        div.addEventListener("click", setGamemode);
     });
 }
 
@@ -16,7 +16,7 @@ function setGamemode(e) {
     localStorage.setItem("gamemode", e.target.id);
 }
 
-function initializeHighscores() {
+function initializeScores() {
     if (localStorage.getItem("currentScore") === null) {
         localStorage.setItem("currentScore", JSON.stringify(0));
     }
