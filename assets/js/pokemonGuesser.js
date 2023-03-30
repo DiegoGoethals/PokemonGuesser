@@ -175,7 +175,7 @@ function openOverlay(message) {
         <p>your highscore is: ${highScore}</p>
         <p>The pokémon we were looking for was:</p>
         <img src="${_pokemon.sprites.other["official-artwork"].front_default}" alt="${_pokemon.name}"/>
-        <p>${_pokemon.name}</p>
+        <p id="name">${_pokemon.name}</p>
         <button onclick="location.reload();">Play again</button>
     `);
     overlay.style.display = "flex";
