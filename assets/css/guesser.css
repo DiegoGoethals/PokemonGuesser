@@ -98,7 +98,8 @@ tr:nth-child(even) {
 }
 
 .correct {
-    color: green;
+    background-color: darkgreen;
+    color: whitesmoke;
 }
 
 #overlay {
