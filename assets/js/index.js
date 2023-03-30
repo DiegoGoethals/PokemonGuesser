@@ -4,16 +4,16 @@ init();
 
 function init() {
     initializeScores();
-    document.querySelectorAll("div").forEach(div => {
+    document.querySelectorAll("main > div").forEach(div => {
         div.addEventListener("click", setGamemode);
     });
 }
 
 function setGamemode(e) {
-    if (localStorage.getItem("gamemode") !== e.target.id) {
+    if (localStorage.getItem("gamemode") !== e.target.parentElement.id) {
         localStorage.setItem("currentScore", JSON.stringify(0));
     }
-    localStorage.setItem("gamemode", e.target.id);
+    localStorage.setItem("gamemode", e.target.parentElement.id);
 }
 
 function initializeScores() {
