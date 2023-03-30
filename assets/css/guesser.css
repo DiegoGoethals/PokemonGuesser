@@ -1,3 +1,7 @@
+body {
+    overflow: hidden;
+}
+
 button {
     cursor: pointer;
 }
@@ -45,12 +49,22 @@ ul {
     background: black;
     color: yellow;
     font-size: 1.5rem;
-    letter-spacing: 0.25rem;
     padding: 0.5rem;
+    height: max-content;
+    max-height: 750%;
+    overflow-y: auto;
 }
 
 li:hover {
     cursor: pointer;
+}
+
+#game {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: start;
+    width: 100%;
 }
 
 table {
