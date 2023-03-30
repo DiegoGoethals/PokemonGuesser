@@ -75,8 +75,8 @@ function guess() {
     }
     if (guess === _pokemon.name) {
         localStorage.setItem("currentScore", JSON.stringify(parseInt(localStorage.getItem("currentScore")) + 1));
-        if (localStorage.getItem("currentScore") > localStorage.getItem(highScore)) {
-            localStorage.setItem(highScore, localStorage.getItem("currentScore"));
+        if (JSON.parse(localStorage.getItem("currentScore")) > JSON.parse(localStorage.getItem(highScore))) {
+            localStorage.setItem(highScore, JSON.parse(localStorage.getItem("currentScore")));
         }
         openOverlay("Congrats, you won");
     } else if (_guesses_left > 1) {
@@ -103,9 +103,10 @@ function showGuess(guess) {
 function checkId(pokemon) {
     if (pokemon.id > _pokemon.id) {
         return `<td>${pokemon.id} <i class="fa-solid fa-arrow-down"></i></td>`
-    } else {
+    } else if (pokemon.id < _pokemon.id) {
         return `<td>${pokemon.id} <i class="fa-solid fa-arrow-up"></i></td>`
     }
+    return `<td class="correct">${pokemon.id}</td>`;
 }
 
 function getTypes(pokemon) {
@@ -168,19 +169,16 @@ function openOverlay(message) {
         highScore = JSON.parse(localStorage.getItem("noImageHighScore"));
     }
     const overlay = document.getElementById("overlay");
-    overlay.insertAdjacentHTML("beforeend", `
-        <div id="endScreen">
-            <p>${message}</p>
-            <p>your current score is: ${JSON.parse(localStorage.getItem("currentScore"))}</p>
-            <p>your highscore is: ${highScore}</p>
-            <p>The pokémon we were looking for was:</p>
-            <img src="${_pokemon.sprites.other["official-artwork"].front_default}" alt="${_pokemon.name}"/>
-            <p>${_pokemon.name}</p>
-            <button onclick="location.reload();">Play again</button>
-        </div>
+    document.getElementById("endScreen").insertAdjacentHTML("beforeend", `
+        <p>${message}</p>
+        <p>your current score is: ${JSON.parse(localStorage.getItem("currentScore"))}</p>
+        <p>your highscore is: ${highScore}</p>
+        <p>The pokémon we were looking for was:</p>
+        <img src="${_pokemon.sprites.other["official-artwork"].front_default}" alt="${_pokemon.name}"/>
+        <p>${_pokemon.name}</p>
+        <button onclick="location.reload();">Play again</button>
     `);
     overlay.style.display = "flex";
-    document.querySelector("body").style.overflow = "hidden";
 }
 
 function off() {
