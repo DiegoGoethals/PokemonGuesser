@@ -20,10 +20,10 @@ function initializeScores() {
     if (localStorage.getItem("currentScore") === null) {
         localStorage.setItem("currentScore", JSON.stringify(0));
     }
-    if (localStorage.getItem("imageHighscore") === null) {
+    if (localStorage.getItem("imageHighScore") === null) {
         localStorage.setItem("imageHighScore", JSON.stringify(0));
     }
-    if (localStorage.getItem("noImageHighscore") === null) {
+    if (localStorage.getItem("noImageHighScore") === null) {
         localStorage.setItem("noImageHighScore", JSON.stringify(0));
     }
 }
