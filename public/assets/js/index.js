@@ -4,26 +4,32 @@ init();
 
 function init() {
     initializeScores();
-    document.querySelectorAll("main > div").forEach(div => {
-        div.addEventListener("click", setGamemode);
+    showHighScores();
+    document.querySelectorAll(".mode").forEach(card => {
+        card.addEventListener("click", setGamemode);
     });
+    // Old versions cached the full Pokémon list here; it now ships in pokedex.js
+    localStorage.removeItem("allPokemon");
 }
 
 function setGamemode(e) {
-    if (localStorage.getItem("gamemode") !== e.target.parentElement.id) {
+    // currentTarget is always the card, no matter which child was clicked
+    const mode = e.currentTarget.dataset.mode;
+    if (localStorage.getItem("gamemode") !== mode) {
         localStorage.setItem("currentScore", JSON.stringify(0));
     }
-    localStorage.setItem("gamemode", e.target.parentElement.id);
+    localStorage.setItem("gamemode", mode);
+}
+
+function showHighScores() {
+    document.getElementById("imageHighScore").textContent = localStorage.getItem("imageHighScore");
+    document.getElementById("noImageHighScore").textContent = localStorage.getItem("noImageHighScore");
 }
 
 function initializeScores() {
-    if (localStorage.getItem("currentScore") === null) {
-        localStorage.setItem("currentScore", JSON.stringify(0));
-    }
-    if (localStorage.getItem("imageHighScore") === null) {
-        localStorage.setItem("imageHighScore", JSON.stringify(0));
-    }
-    if (localStorage.getItem("noImageHighScore") === null) {
-        localStorage.setItem("noImageHighScore", JSON.stringify(0));
+    for (const key of ["currentScore", "imageHighScore", "noImageHighScore"]) {
+        if (localStorage.getItem(key) === null) {
+            localStorage.setItem(key, JSON.stringify(0));
+        }
     }
 }

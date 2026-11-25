@@ -6,49 +6,39 @@
     <title>Who's that Pokémon</title>
 
     <!-- Styling -->
+    <link rel="preload" href="assets/css/fonts/Pokemon Solid.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="assets/css/reset.css">
-    <link rel="stylesheet" href="assets/css/guessWithImage.css">
-    <link rel="stylesheet" href="assets/css/guesser.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/game.css">
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 
     <!-- Scripts -->
-    <script src="assets/js/apiCommunicator.js" defer></script>
-    <script src="assets/js/config.js" defer></script>
+    <script src="assets/js/pokedex.js" defer></script>
     <script src="assets/js/pokemonGuesser.js" defer></script>
-    <script src="assets/js/guessWithImage.js" defer></script>
 </head>
 <body>
-    <button id="changeMode" onClick="window.location ='index.html';">Change gamemode</button>
-    <div id="overlay">
-        <div id="endScreen">
-            <button id="close" onclick="off()">x</button>
-        </div>
-    </div>
     <main>
-        <div id="guessContainer">
-            <label>
-                <input placeholder="Guess the pokémon ..." autocomplete="off">
-            </label>
-            <div id="guessesLeft"></div>
-            <ul></ul>
-        </div>
-        <div id="game">
-            <div id="imageContainer"></div>
-            <div id="guesses">
-                <table>
-                    <tr>
-                        <th>Name</th>
-                        <th>Dex number</th>
-                        <th>Type 1</th>
-                        <th>Type 2</th>
-                        <th>Ability 1</th>
-                        <th>Ability 2</th>
-                        <th>Ability 3</th>
-                    </tr>
-                </table>
+        <section id="scene">
+            <a id="back" href="index.html">← Modes</a>
+            <div id="mystery"></div>
+        </section>
+
+        <div id="bar">
+            <div id="search">
+                <input id="guessInput" placeholder="Guess the Pokémon…" autocomplete="off" spellcheck="false"
+                       role="combobox" aria-controls="suggestions" aria-expanded="false">
+                <ul id="suggestions" role="listbox"></ul>
             </div>
+            <div id="balls" role="img"></div>
         </div>
+
+        <div id="result" hidden></div>
+
+        <p id="hint">
+            Each guess shows its dex number (↑ the mystery Pokémon is higher, ↓ lower), its types and its abilities.
+            Anything shared with the mystery Pokémon lights up green.
+        </p>
+        <section id="guesses"></section>
     </main>
 </body>
 </html>

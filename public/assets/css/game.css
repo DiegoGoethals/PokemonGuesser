@@ -1,0 +1,331 @@
+body {
+    min-height: 100vh;
+    padding: 1.5rem 1rem 3rem;
+    background: radial-gradient(ellipse at top, #222b55, var(--navy) 60%) var(--navy);
+}
+
+main {
+    /* Wide enough for the scene, but short enough that the input stays on screen */
+    width: min(100%, 60rem, max(28rem, (100vh - 13rem) * 16 / 9));
+    margin: 0 auto;
+}
+
+/* ---------- The "Who's that Pokémon?" scene ---------- */
+
+#scene {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    container-type: inline-size;
+    border-radius: 1rem;
+    overflow: hidden;
+    /* Same 16:9 ratio as the image, so % positions below line up with the picture */
+    background: url("/assets/images/background.jpg") center / cover;
+    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.5);
+}
+
+#back {
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+    z-index: 1;
+    padding: 0.3rem 0.9rem;
+    border-radius: 999px;
+    border: 2px solid var(--poke-yellow);
+    background: rgba(0, 0, 0, 0.55);
+    color: var(--poke-yellow);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: background 0.15s;
+}
+
+#back:hover,
+#back:focus-visible {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* Centre of the blue burst in background.jpg */
+#mystery {
+    position: absolute;
+    left: 29%;
+    top: 41%;
+    height: 68%;
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    display: grid;
+    place-items: center;
+}
+
+#mystery img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: brightness(0);
+    transition: filter 0.9s ease;
+}
+
+#mystery.revealed img {
+    filter: none;
+    animation: pop 0.6s ease;
+}
+
+#mystery .question {
+    font-size: 28cqw;
+    line-height: 1;
+}
+
+@keyframes pop {
+    40% { scale: 1.08; }
+}
+
+/* ---------- Input bar docked on the bottom edge of the scene ---------- */
+
+#bar,
+#result {
+    position: relative;
+    z-index: 2;
+    margin-top: -1.75rem;
+    padding: 0 1rem;
+}
+
+#bar {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+#bar[hidden] {
+    display: none;
+}
+
+#search {
+    position: relative;
+    flex: 1;
+}
+
+#guessInput {
+    width: 100%;
+    padding: 0.8rem 1.3rem;
+    border-radius: 999px;
+    border: 3px solid var(--poke-blue);
+    background: white;
+    color: #1a1a2e;
+    font: inherit;
+    font-size: 1.1rem;
+    box-shadow: 0 0.3rem 0 var(--poke-blue-dark), 0 0.5rem 1.25rem rgba(0, 0, 0, 0.4);
+}
+
+#guessInput:focus {
+    outline: none;
+    border-color: var(--poke-yellow);
+}
+
+#suggestions {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    left: 0;
+    right: 0;
+    max-height: 18rem;
+    overflow-y: auto;
+    list-style: none;
+    padding: 0.35rem;
+    border-radius: 0.9rem;
+    border: 2px solid var(--poke-yellow);
+    background: #1b2347;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+}
+
+#suggestions.open {
+    display: block;
+}
+
+#suggestions li {
+    padding: 0.5rem 0.9rem;
+    border-radius: 0.6rem;
+    cursor: pointer;
+}
+
+#suggestions li.active {
+    background: var(--poke-blue);
+}
+
+#balls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 999px;
+    border: 2px solid var(--poke-yellow);
+    background: rgba(10, 15, 40, 0.9);
+}
+
+.ball {
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    border: 2px solid #111;
+    background: linear-gradient(#e3350d 0 42%, #111 42% 58%, #f4f4f4 58%);
+    transition: filter 0.3s, opacity 0.3s;
+}
+
+.ball.used {
+    filter: grayscale(1);
+    opacity: 0.3;
+}
+
+/* ---------- End of round ---------- */
+
+#result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+    max-width: 100%;
+    padding: 1.25rem 2rem 1.5rem;
+    border-radius: 1.25rem;
+    border: 3px solid var(--poke-yellow);
+    background: rgba(10, 15, 40, 0.95);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5);
+    text-align: center;
+    animation: rise 0.4s ease;
+}
+
+#result[hidden] {
+    display: none;
+}
+
+#result h2 {
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.3;
+}
+
+#result p {
+    color: var(--card-text);
+}
+
+#playAgain {
+    margin-top: 0.25rem;
+    padding: 0.6rem 1.75rem;
+    border-radius: 999px;
+    border: 3px solid var(--poke-blue);
+    background: var(--poke-yellow);
+    color: var(--poke-blue-dark);
+    font: inherit;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 0.25rem 0 var(--poke-blue-dark);
+}
+
+#playAgain:hover,
+#playAgain:focus-visible {
+    outline: none;
+    filter: brightness(1.08);
+}
+
+#playAgain:active {
+    translate: 0 0.2rem;
+    box-shadow: none;
+}
+
+/* ---------- Guess history ---------- */
+
+#hint {
+    margin: 1.5rem auto 0;
+    max-width: 40rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #8f98c4;
+}
+
+#guesses {
+    display: grid;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 0.8rem;
+    border-radius: 0.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    animation: rise 0.3s ease;
+}
+
+.row .name {
+    min-width: 8rem;
+    margin-right: 0.25rem;
+    font-weight: 700;
+}
+
+.tile {
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.5rem;
+    border: 2px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.08);
+    color: #b9c0e6;
+    font-size: 0.9rem;
+    text-transform: capitalize;
+}
+
+.tile.match {
+    border-color: var(--match);
+    background: rgba(61, 220, 132, 0.2);
+    color: white;
+}
+
+.tile.type {
+    border-color: transparent;
+    background: color-mix(in srgb, var(--type) 30%, transparent);
+    color: #c9cff0;
+    font-weight: 600;
+}
+
+.tile.type.match {
+    border-color: var(--match);
+    background: var(--type);
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 0 2px var(--navy), 0 0 0 4px var(--match);
+}
+
+@keyframes rise {
+    from {
+        opacity: 0;
+        translate: 0 0.5rem;
+    }
+}
+
+/* ---------- Phones ---------- */
+
+@media (max-width: 40rem) {
+    body {
+        padding: 0.75rem 0.75rem 2rem;
+    }
+
+    main {
+        width: 100%;
+    }
+
+    #bar {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 0.5rem;
+    }
+
+    #balls {
+        align-self: center;
+    }
+
+    .row .name {
+        flex-basis: 100%;
+    }
+}

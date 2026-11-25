@@ -6,28 +6,39 @@
     <title>Who's that Pokémon</title>
 
     <!-- Styling -->
+    <link rel="preload" href="assets/css/fonts/Pokemon Solid.ttf" as="font" type="font/ttf" crossorigin>
     <link rel="stylesheet" href="assets/css/reset.css">
+    <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/index.css">
     <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
 
     <!-- Scripts -->
-    <script src="assets/js/config.js" defer></script>
-    <script src="assets/js/apiCommunicator.js" defer></script>
-    <script src="assets/js/initializer.js" defer></script>
     <script src="assets/js/index.js" defer></script>
 </head>
 <body>
-    <h1>Welcome to Who's that pokémon?</h1>
-    <h2>What gamemode would you like to play?</h2>
+    <h1>Who's that Pokémon?</h1>
     <main>
-        <div id="image" onClick="window.location ='game.html';">
-            <div id="easy">Easy</div>
-            <h4>Guess the pokémon with the help of a blacked out image of the pokemon</h4>
-        </div>
-        <div id="noImage" onClick="window.location ='game.html';">
-            <div id="hard">Hard</div>
-            <h4>Guess the pokémon without seeing an image of the pokemon</h4>
-        </div>
+        <a class="mode" href="game.html" data-mode="image">
+            <div class="art">
+                <img src="https://cdn.jsdelivr.net/gh/PokeAPI/sprites@master/sprites/pokemon/other/official-artwork/25.png"
+                     alt="" width="120" height="120">
+            </div>
+            <h2>Easy</h2>
+            <p>Guess from the silhouette</p>
+            <div class="chips">
+                <span class="chip">6 guesses</span>
+                <span class="chip best">Best: <span id="imageHighScore">0</span></span>
+            </div>
+        </a>
+        <a class="mode" href="game.html" data-mode="noImage">
+            <div class="art"><span class="question">?</span></div>
+            <h2>Hard</h2>
+            <p>No image, clues only</p>
+            <div class="chips">
+                <span class="chip">10 guesses</span>
+                <span class="chip best">Best: <span id="noImageHighScore">0</span></span>
+            </div>
+        </a>
     </main>
 </body>
 </html>
